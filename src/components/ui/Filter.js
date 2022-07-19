@@ -1,20 +1,24 @@
-import React from 'react';
-import {getOptions} from '../../services/filter';
+import React, { useContext } from 'react'
+import { getOptions } from '../../services/filter'
+import { StateContext } from '../contexts/StateProvider'
 
 export default function Filter(props) {
-    const options = getOptions();
-    const {filter, changeFilter} = props;
-    const getClass = (key) => (key === filter ? 'selected' : '');
+  const options = getOptions()
+  const {
+    data: { filter },
+    actions: { changeFilter },
+  } = useContext(StateContext)
+  const getClass = (key) => (key === filter ? 'selected' : '')
 
-    return (
-        <ul className="filters list-unstyled clearfix">
-            {Object.keys(options).map(key => (
-                <li key={key}>
-                    <a onClick={() => changeFilter(key)} className={getClass(key)}>
-                        {options[key]}
-                    </a>
-                </li>
-            ))}
-        </ul>
-    );
+  return (
+    <ul className="filters list-unstyled clearfix">
+      {Object.keys(options).map((key) => (
+        <li key={key}>
+          <a onClick={() => changeFilter(key)} className={getClass(key)}>
+            {options[key]}
+          </a>
+        </li>
+      ))}
+    </ul>
+  )
 }
