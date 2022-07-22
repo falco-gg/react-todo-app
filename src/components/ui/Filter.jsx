@@ -2,7 +2,7 @@ import React, { useContext } from 'react'
 import { getOptions } from '../../services/filter'
 import { StateContext } from '../contexts/StateProvider'
 
-export default function Filter(props) {
+export default function Filter() {
   const options = getOptions()
   const {
     data: { filter },
