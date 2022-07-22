@@ -1,13 +1,9 @@
-import React, { useContext } from 'react'
+import React from 'react'
 import TodoItem from './TodoItem'
 import { MSG_NO_ITEMS } from '../../assets/text/en_US'
-import { StateContext } from '../contexts/StateProvider'
 
 export default function FilteredList(props) {
   const { items } = props
-  const {
-    actions: { changeStatus },
-  } = useContext(StateContext)
 
   if (items.length === 0) {
     return <p className="alert alert-info">{MSG_NO_ITEMS}</p>
@@ -16,7 +12,7 @@ export default function FilteredList(props) {
   return (
     <ul className="list-unstyled">
       {items.map((item) => (
-        <TodoItem key={item.id} data={item} changeStatus={changeStatus} />
+        <TodoItem key={item.id} {...item} />
       ))}
     </ul>
   )
